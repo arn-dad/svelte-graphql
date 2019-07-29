@@ -1,0 +1,12 @@
+{
+    "env": {
+      "node": true
+    },
+    "extends": "airbnb-base",
+    "plugins": ["promise"],
+    "rules": {
+      "no-underscore-dangle": 0,
+      "no-shadow": 0,
+      "linebreak-style": 0
+    }
+}
