@@ -5,9 +5,10 @@
   import { bookingQuery, bookingCancelMutation } from '../queryCreators'
   import { userStore, bookingStore } from '../stores'
 
-  let userData = null
-  let bookings = []
-  let isLoading = false
+  let userData = null;
+  let bookings = [];
+  let isLoading = false;
+  let tabsState = true;
 
   userStore.subscribe(usStore => {
     userData = usStore
@@ -82,10 +83,55 @@
       console.log('TCL: fetchBookings -> error', error)
     }
   }
+  function changeTabsContnet(view) {
+    tabsState = view
+  }
 </script>
 
-{#if isLoading}
-  <Spinner />
-{:else}
-  <BookingList {bookings} handleCancelBooking={handleCancelBooking} />
-{/if}
+<style>
+  .tabs {
+    
+  }
+  .tabs-controls {
+    width: 120px;
+    margin: 0 auto;
+  }
+
+  .link-active {
+    border-bottom: 1px solid rgb(99, 99, 99);
+  }
+
+  .chart-box {
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 40rem;
+    max-width: 90%;
+    list-style: none;
+    padding: 0;
+  }
+
+</style>
+
+<div class="page-content">
+  <div class="tabs">
+    <div class="tabs-controls">
+      <button class={`btn ${tabsState ? 'link-active' : ''}`} on:click="{() => changeTabsContnet(true)}">List</button>
+      <button class={`btn ${!tabsState ? 'link-active' : ''}`} on:click="{() => changeTabsContnet(false)}">Chart</button>
+    </div>
+
+    {#if tabsState}
+      {#if isLoading}
+        <Spinner />
+      {:else}
+        <BookingList {bookings} handleCancelBooking={handleCancelBooking} />
+      {/if}
+      {:else}
+        <div class="chart-box">
+          Chart
+        </div>
+    {/if}
+  </div>
+</div>
+
+
+

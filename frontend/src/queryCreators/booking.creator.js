@@ -1,24 +1,30 @@
 export const bookingMutation = ({ eventId }) => ({
     query: `
-    mutation {
-        bookEvent(eventId: "${eventId}") {
-            _id
-            createdAt
-            updatedAt
+        mutation BookEvent($id: ID!){
+            bookEvent(eventId: $id) {
+                _id
+                createdAt
+                updatedAt
+            }
         }
+    `,
+    variables: {
+        id: eventId
     }
-`
 })
 
 export const bookingCancelMutation = ({ bookingId }) => ({
     query: `
-    mutation {
-        cancelBooking(bookingId: "${bookingId}") {
-            _id
-            title
+        mutation CancelBooking($id: ID!) {
+            cancelBooking(bookingId: $id) {
+                _id
+                title
+            }
         }
+    `,
+    variables: {
+        id: bookingId
     }
-`
 })
 
 export const bookingQuery = () => ({

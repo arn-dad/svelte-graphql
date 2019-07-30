@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 }
 
+.page-content {
+  padding: 10px 25px;
+}
+
 .form-control label,
 .form-control input,
 .form-control textarea {
@@ -42,4 +46,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .button-secondary {
   background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.btn {
+  background: none;
+  outline: none;
+  border: none;
 }

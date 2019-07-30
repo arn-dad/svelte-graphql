@@ -7,6 +7,9 @@ const { dateToString, Console } = require('../../helpers');
 const event = async (eventsIds) => {
   try {
     const events = await Event.find({ _id: { $in: eventsIds } });
+    events.sort((a, b) => {
+      return eventsIds.indexOf(a._id.toString()) - eventsIds.indexOf(b._id.toString())
+    });
     return events.map(event => transformEvent(event));
   } catch (err) {
     throw err;
@@ -27,7 +30,7 @@ const user = async (userId) => {
     return {
       ...user._doc,
       _id: user.id,
-      createEvents: eventLoader.loadMany.bind(this, user._doc.createdEvents),
+      createEvents: () => eventLoader.loadMany(user._doc.createdEvents),
     };
   } catch (err) {
     throw err;

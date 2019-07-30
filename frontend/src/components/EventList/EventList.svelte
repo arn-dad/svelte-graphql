@@ -14,6 +14,8 @@
     max-width: 90%;
     list-style: none;
     padding: 0;
+    height: calc(100vh - 48px - 80px - 4rem);
+    overflow-y: scroll;
   }
 </style>
 
